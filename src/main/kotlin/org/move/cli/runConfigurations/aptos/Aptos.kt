@@ -227,6 +227,10 @@ data class Aptos(val cliLocation: Path, val parentDisposable: Disposable?): Disp
             if (settings.skipFetchLatestGitDeps && "--skip-fetch-latest-git-deps" !in extraArguments) {
                 add("--skip-fetch-latest-git-deps")
             }
+            if (settings.state.devMode && "--dev" !in extraArguments) {
+                add("--dev")
+            }
+            if (settings.skipFetchLatestGitDeps)
             if (project.isCompilerJsonOutputEnabled) {
                 add("--experiments"); add("compiler-message-format-json")
             }

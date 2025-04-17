@@ -4,6 +4,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import org.move.cli.manifest.AptosConfigYaml
 import org.move.cli.manifest.MoveToml
+import org.move.cli.settings.moveSettings
 import org.move.lang.core.psi.MvElement
 import org.move.lang.moveProject
 import org.move.lang.toNioPathOrNull

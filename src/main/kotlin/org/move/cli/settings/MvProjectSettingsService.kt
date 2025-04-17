@@ -60,6 +60,7 @@ class MvProjectSettingsService(
         var skipFetchLatestGitDeps: Boolean by property(true)
 
         var dumpStateOnTestFailure: Boolean by property(false)
+        var devMode: Boolean by property(false)
 
         @AffectsHighlighting
         var enableMove2: Boolean by property(true)

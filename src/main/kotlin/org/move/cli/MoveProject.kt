@@ -15,6 +15,7 @@ import com.intellij.psi.util.CachedValueProvider
 import com.intellij.psi.util.CachedValuesManager
 import com.intellij.psi.util.PsiModificationTracker
 import org.move.cli.manifest.MoveToml
+import org.move.cli.settings.moveSettings
 import org.move.cli.tests.testAddressesService
 import org.move.lang.MoveFile
 import org.move.lang.core.types.Address.Named
@@ -65,7 +66,8 @@ data class MoveProject(
                 cumulativeAddresses.extendWith(depPackage.addresses())
                 cumulativeAddresses.applySubstitution(addrSubst, packageName)
             }
-            cumulativeAddresses.extendWith(this.currentPackage.addresses())
+            //cumulativeAddresses.extendWith(this.currentPackage.addresses())
+            cumulativeAddresses.values.putAll(this.currentPackageAddresses())
 
             CachedValueProvider.Result.create(
                 cumulativeAddresses,
@@ -81,8 +83,14 @@ data class MoveProject(
     fun currentPackageAddresses(): AddressMap {
         val addresses = this.currentPackage.addresses()
         val map = mutableAddressMap()
-        map.putAll(addresses.values)
         map.putAll(addresses.placeholdersAsValues())
+        map.putAll(addresses.values)
+
+        // If dev mode is enabled, add addresses from [dev-addresses]
+        if (this.currentPackage.moveToml.project.moveSettings.state.devMode) {
+            map.putAll(this.currentPackage.moveToml.declaredDevAddresses().values)
+        }
+
         return map
     }
 

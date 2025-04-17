@@ -65,6 +65,9 @@ class PerProjectAptosConfigurable(val project: Project): BoundConfigurable("Apto
                             )
                             .bindSelected(state::dumpStateOnTestFailure)
                     }
+                    row {
+                        checkBox("Enable dev mode").comment("Add --dev to the sync").bindSelected(state::devMode)
+                    }
                 }
             }
 
@@ -93,6 +96,7 @@ class PerProjectAptosConfigurable(val project: Project): BoundConfigurable("Apto
                     it.dumpStateOnTestFailure = state.dumpStateOnTestFailure
                     it.enableMove2 = state.enableMove2
                     it.fetchAptosDeps = state.fetchAptosDeps
+                    it.devMode = state.devMode
                 }
             }
 

@@ -24,9 +24,13 @@ class MoveToml(
     val packageName: String? get() = packageTable?.name
 
     fun declaredAddresses(): PackageAddresses {
+        return declaredAddressesFromRaw(this.addresses)
+    }
+    fun declaredDevAddresses(): PackageAddresses {
+        return declaredAddressesFromRaw(this.dev_addresses)
+    }
+    private fun declaredAddressesFromRaw(raws: RawAddressMap): PackageAddresses {
         val packageName = this.packageName ?: ""
-        val raws = this.addresses
-
         val values = mutableAddressMap()
         val placeholders = placeholderMap()
         for ((addressName, addressVal) in raws.entries) {
