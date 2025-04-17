@@ -7,6 +7,13 @@ Plugin documentation is available at https://intellij-move.github.io/.
 
 Open `Settings > Plugins > Marketplace` in your IDE, search for _Move on Aptos_ and install the plugin.
 
+Install from Local:
+
+```
+./gradlew buildPlugin
+```
+then install from folder `build/distributions/` in you IDE.
+
 ## Compatible IDEs
 
 The plugin is compatible with all IntelliJ-based IDEs starting from 2024.2. 
